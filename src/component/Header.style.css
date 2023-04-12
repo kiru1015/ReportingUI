@@ -1,0 +1,19 @@
+.article-header {
+  background-color: #1d9a85;
+  color: white;
+  border: 3px solid transparent;
+  text-align: center;
+  font-size: 20px!important;
+  font-weight: 600!important;
+}
+
+.section-content {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 15px;
+}
+
+.add-job-btn {
+  float: right;
+  margin-bottom: 5px;
+}
