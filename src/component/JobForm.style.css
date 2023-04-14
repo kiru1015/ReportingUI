@@ -73,3 +73,6 @@ label {
   font-style: bold!important;
 }
 
+.Errormsg{
+  color:red;
+}

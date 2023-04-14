@@ -16,4 +16,21 @@
 .add-job-btn {
   float: right;
   margin-bottom: 5px;
+  background-color: #1d9a85;
+  font-family: arial, sans-serif;
+  border-radius: 7px;
+  width: 10%;
+  font-size: 14px!important;
+  margin-right: 90%;
+  margin-bottom: 2%;
+  color: white;
+  font-weight: 600!important;
 }
+
+.add-job-btn:hover {
+  background-color: #e7e7e7;
+  color: black;
+  font-family: arial, sans-serif;
+}
+
+

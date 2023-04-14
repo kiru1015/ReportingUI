@@ -18,16 +18,16 @@ const JobModal = (props: Props) => {
         <h3>Job Details</h3>
         <div>
           <div>
-            <label>Name : {data.firstName}</label>
-          </div>
-          <div>
-            <label>Name : {data.lastName}</label>
+            <label>Raised By : {`${data.firstName} ${data.lastName}`}</label>
           </div>
           <div>
             <label>Summary : {data.summary}</label>
           </div>
           <div>
             <label>Description : {data.description}</label>
+          </div>
+          <div>
+            <label>Status : {data.status}</label>
           </div>
           <div>
             <label>Property : {data.property}</label>

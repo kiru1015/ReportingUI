@@ -6,16 +6,15 @@ import axios from "axios";
 
 type Props = {
   list: IJob[];
-  onDeleteClickHnd: (data: IJob) => void;
-  onEdit: (data: IJob) => void;
+ 
 };
 
 const JobList = (props: Props) => {
-  const { onDeleteClickHnd, onEdit } = props;
+
   const [showModal, setShowModal] = useState(false);
   const [dataToShow, setDataToShow] = useState(null as IJob | null);
   const [jobs, setJobs] = useState([]);
-  // const [jobList, setJobList] = useState([] as IJob[]);
+
 
   useEffect(() => {
     let jobData = [];
@@ -48,10 +47,10 @@ const JobList = (props: Props) => {
   const onCloseModal = () => setShowModal(false);
 
   return (
-    <div className="jobWrapper">
-      <table>
+    <div>
+      <table id="jobs">
         <tr>
-          <th>Name</th>
+          <th>Raised By</th>
           <th>Summary</th>
           <th>Description</th>
           <th>Status</th>
@@ -71,8 +70,7 @@ const JobList = (props: Props) => {
               <td>
                 <div>
                   <input type="button" value="View" onClick={() => viewJob(job)}/>
-                  <input type="button" value="Edit" onClick={() => onEdit(job)}/>
-                  <input type="button" value="Delete" onClick={() => onDeleteClickHnd(job)}/>
+             
                 </div>
               </td>
             </tr>

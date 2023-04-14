@@ -21,9 +21,18 @@ const AddJob = (props: Props) => {
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("Open");
   const [property, setProperty] = useState("");
-  // const [propertyOptions, setPropertyOptions] = useState([]);
+  const [error, setError] = useState(false);
 
-  //const { onBackBtnClickHnd, onSubmitClickHnd } = props;
+  // const [state, setState] = React.useState({
+  //   firstName: "",
+  //   lastName: "",
+  //   summary: "",
+  //   description: "",
+  //   status: "Open",
+  //   property: "",
+  // });
+
+ 
   const { onBackBtnClickHnd } = props;
 
   const onFirstNameChangeHnd = (e: any) => {
@@ -48,49 +57,85 @@ const AddJob = (props: Props) => {
   };
 
   const onSubmitBtnClickHnd = (e: any) => {
-    e.preventDefault();
-    fetch("http://localhost:8000/add_job", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstName: firstName,
-        lastName: lastName,
-        summary: summary,
-        description: description,
-        status: status,
-        propertyName: property,
-        // propertyName: propertyName
-      }),
-    });
-
+    if (
+      firstName.length === 0 ||
+      lastName.length === 0 ||
+      summary.length === 0 ||
+      description.length === 0 ||
+      property.length === 0
+    ) {
+      setError(true);
+    } else {
+      e.preventDefault();
+      fetch("http://localhost:8000/add_job", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          summary: summary,
+          description: description,
+          status: status,
+          propertyName: property,
+          //propertyName: propertyName
+        }),
+      });
+    }
   };
 
   return (
     <div className="form-container">
-      <div><h3>Log a Job</h3></div>
+      <div>
+        <h3>Log a Job</h3>
+      </div>
       <form onSubmit={onSubmitBtnClickHnd} className="jobWrapper">
-        <div> 
+        <div>
           <label>First Name:</label>
-          <input type="text" value={firstName} onChange={onFirstNameChangeHnd} placeholder="Enter First Name" required />
+          <input
+            type="text"
+            name="FirstName"
+            alt="FirstName"
+            onChange={onFirstNameChangeHnd}
+            placeholder="Enter First Name"
+          />
         </div>
+        {error && firstName.length <= 0 ? (
+          <label className="Errormsg">First Name can't be Empty</label>
+        ) : (
+          ""
+        )}
+
         <div>
           <label>Last Name:</label>
-          <input type="text" value={lastName} onChange={onLastNameChangeHnd} placeholder="Enter Last Name" required />
+          <input
+            type="text"
+            onChange={onLastNameChangeHnd}
+            placeholder="Enter Last Name"
+          />
         </div>
+        {error && lastName.length <= 0 ? (
+          <label className="Errormsg">Last Name can't be Empty</label>
+        ) : (
+          ""
+        )}
+
         <div>
           <label>Summary:</label>
           <input
             type="text"
-            value={summary}
             onChange={onSummaryChangeHnd}
             placeholder="Enter Summary here...(max 150 characters)"
             maxLength={150}
-            required
           />
         </div>
+        {error && summary.length <= 0 ? (
+          <label className="Errormsg">Summary can't be Empty</label>
+        ) : (
+          ""
+        )}
         <div>
           <label>Description:</label>
           <textarea
@@ -98,10 +143,13 @@ const AddJob = (props: Props) => {
             onChange={onDescriptionChangeHnd}
             placeholder="Enter Description...(max 500 characters)"
             maxLength={500}
-            value={description}
-            required
           />
         </div>
+        {error && description.length <= 0 ? (
+          <label className="Errormsg">Description can't be Empty</label>
+        ) : (
+          ""
+        )}
 
         <div>
           <label>Status:</label>
@@ -114,8 +162,17 @@ const AddJob = (props: Props) => {
 
         <div>
           <label>Property Name:</label>
-          <input type="text" value={property} onChange={onPropertyChangeHnd}  placeholder="Enter Property Name" required />
+          <input
+            type="text"
+            onChange={onPropertyChangeHnd}
+            placeholder="Enter Property Name"
+          />
         </div>
+        {error && property.length <= 0 ? (
+          <label className="Errormsg">Property can't be Empty</label>
+        ) : (
+          ""
+        )}
         <div>
           <input type="button" value="Back" onClick={onBackBtnClickHnd} />
           <input type="submit" value="Submit" />
